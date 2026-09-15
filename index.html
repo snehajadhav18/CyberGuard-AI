@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberGuard AI – Cybersecurity Awareness</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">🛡️</span>
+      <span class="brand-name">CyberGuard AI</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active" data-section="dashboard">🏠 Dashboard</a></li>
+      <li><a href="#" class="nav-link" data-section="analyzer">🔍 Message Analyzer</a></li>
+      <li><a href="#" class="nav-link" data-section="password">🔑 Password Advisor</a></li>
+      <li><a href="#" class="nav-link" data-section="chatbot">🤖 Cyber Chatbot</a></li>
+      <li><a href="#" class="nav-link" data-section="tips">💡 Safety Tips</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <span class="disclaimer-badge">⚠️ For awareness only</span>
+    </div>
+  </nav>
+
+  <!-- Mobile Top Bar -->
+  <header class="topbar">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <span class="topbar-title">🛡️ CyberGuard AI</span>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="section active" id="dashboard">
+      <div class="section-header">
+        <h1>Welcome to CyberGuard AI</h1>
+        <p class="subtitle">Your beginner-friendly guide to staying safe online.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card safe">
+          <div class="stat-icon">🔍</div>
+          <div class="stat-label">Message Analyzer</div>
+          <div class="stat-desc">Detect phishing &amp; scam messages</div>
+          <button class="btn btn-primary" data-goto="analyzer">Analyze Now</button>
+        </div>
+        <div class="stat-card warn">
+          <div class="stat-icon">🔑</div>
+          <div class="stat-label">Password Advisor</div>
+          <div class="stat-desc">Check if your password is strong</div>
+          <button class="btn btn-primary" data-goto="password">Check Password</button>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-icon">🤖</div>
+          <div class="stat-label">Cyber Chatbot</div>
+          <div class="stat-desc">Ask anything about online safety</div>
+          <button class="btn btn-primary" data-goto="chatbot">Chat Now</button>
+        </div>
+        <div class="stat-card tip">
+          <div class="stat-icon">💡</div>
+          <div class="stat-label">Safety Tips</div>
+          <div class="stat-desc">Quick tips to protect yourself online</div>
+          <button class="btn btn-primary" data-goto="tips">View Tips</button>
+        </div>
+      </div>
+      <div class="disclaimer-box">
+        <strong>⚠️ Disclaimer:</strong> CyberGuard AI provides cybersecurity guidance for awareness purposes only.
+        It cannot guarantee that any message, link, or website is completely safe. Always verify through official channels.
+      </div>
+      <div class="threat-overview">
+        <h2>🚨 Common Cyber Threats to Watch Out For</h2>
+        <div class="threat-grid">
+          <div class="threat-item"><div class="threat-icon">🎣</div><div class="threat-title">Phishing</div><div class="threat-desc">Fake messages pretending to be banks, companies, or the government to steal your details.</div></div>
+          <div class="threat-item"><div class="threat-icon">💸</div><div class="threat-title">Scams</div><div class="threat-desc">Too-good-to-be-true offers, fake prizes, or urgent requests for money.</div></div>
+          <div class="threat-item"><div class="threat-icon">🔓</div><div class="threat-title">Weak Passwords</div><div class="threat-desc">Simple or reused passwords make it easy for hackers to take over your accounts.</div></div>
+          <div class="threat-item"><div class="threat-icon">🕵️</div><div class="threat-title">Social Engineering</div><div class="threat-desc">Manipulative tactics to trick you into giving away sensitive information.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MESSAGE ANALYZER ===== -->
+    <section class="section" id="analyzer">
+      <div class="section-header">
+        <h1>🔍 Message Analyzer</h1>
+        <p class="subtitle">Paste any suspicious email, SMS, WhatsApp message, or notification. CyberGuard AI analyzes context, intent, and links — without visiting them.</p>
+      </div>
+      <div class="card">
+        <label class="input-label" for="messageInput">Paste your message here:</label>
+        <textarea id="messageInput" class="message-input" rows="7"
+          placeholder="Paste any message, email, SMS, or notification to analyze it for phishing, social engineering, and suspicious URLs..."></textarea>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="analyzeBtn">🔍 Analyze Message</button>
+          <button class="btn btn-secondary" id="clearMsgBtn">✕ Clear</button>
+        </div>
+        <p class="input-hint">💡 Tip: Press <kbd>Ctrl+Enter</kbd> to analyze, or try a sample below.</p>
+      </div>
+
+      <!-- Result Card -->
+      <div class="result-card hidden" id="analyzerResult">
+
+        <!-- Score Header -->
+        <div class="score-header-block" id="analyzerScoreHeader"></div>
+
+        <!-- Score Bar -->
+        <div class="result-score-bar-wrap">
+          <div class="result-score-bar" id="analyzerScoreBar"></div>
+        </div>
+        <div class="score-tier-range-row">
+          <span class="tier-range">🟢 0–20 Low</span>
+          <span class="tier-range">🟡 21–40 Moderate</span>
+          <span class="tier-range">🟠 41–60 Suspicious</span>
+          <span class="tier-range">🔴 61–80 High Risk</span>
+          <span class="tier-range">⚫ 81–100 Critical</span>
+        </div>
+
+        <!-- Risk Factor Breakdown -->
+        <div class="result-section">
+          <h3>📊 Security Signal Breakdown</h3>
+          <div id="analyzerSignalBreakdown" class="signal-breakdown"></div>
+        </div>
+
+        <!-- Risk Factors Contributing -->
+        <div class="result-section">
+          <h3>🧮 Risk Factors Contributing to This Score</h3>
+          <div id="analyzerRiskFactors" class="risk-factors-list"></div>
+        </div>
+
+        <!-- URL Analysis -->
+        <div class="result-section">
+          <h3>🔗 URL / Link Analysis</h3>
+          <div id="analyzerURLPanel" class="url-panel"></div>
+        </div>
+
+        <!-- Brand Mismatch -->
+        <div class="result-section">
+          <h3>🏢 Brand &amp; Domain Check</h3>
+          <div id="analyzerBrandPanel" class="brand-panel"></div>
+        </div>
+
+        <!-- Why Flagged -->
+        <div class="result-section">
+          <h3>💬 Why Was This Flagged?</h3>
+          <p id="analyzerExplanation" class="explanation-text"></p>
+        </div>
+
+        <!-- Recommended Actions -->
+        <div class="result-section">
+          <h3>✅ Recommended Actions</h3>
+          <ul id="analyzerActions" class="action-list"></ul>
+        </div>
+
+      </div><!-- /result-card -->
+
+      <!-- Sample Messages -->
+      <div class="sample-messages-panel">
+        <div class="sample-label">🧪 Try a sample message:</div>
+        <div class="sample-btns">
+          <button class="sample-btn" data-sample="Hi, our project meeting is scheduled for tomorrow at 10 AM. Please bring your project documentation.">✅ Normal</button>
+          <button class="sample-btn" data-sample="Dear Customer, your account requires a routine security verification. Please review your account within 24 hours to avoid temporary restrictions. You can complete the verification process here: https://secure-account-verification.example.com">⚠️ Subtle Phish</button>
+          <button class="sample-btn" data-sample="Your bank account will be suspended today. Verify your account at https://bank-login-secure.example.com and enter your OTP.">🚨 Bank Threat</button>
+          <button class="sample-btn" data-sample="Congratulations! You won Rs.50,000. Click this link and send your OTP to claim the reward: https://bit.ly/prize-claim99">🚨 Reward Scam</button>
+          <button class="sample-btn" data-sample="URGENT: Your SBI account has been suspended due to KYC update pending. Share your Aadhaar number and OTP to reactivate. Do not tell anyone about this message.">🚨 KYC Fraud</button>
+        </div>
+      </div>
+
+      <div class="disclaimer-box small">
+        <strong>⚠️ Disclaimer:</strong> CyberGuard AI uses local signal analysis. It does not visit or open any URLs. Results are indicative only — always verify through official channels before taking action.
+      </div>
+    </section>
+
+    <!-- ===== PASSWORD ADVISOR ===== -->
+    <section class="section" id="password">
+      <div class="section-header">
+        <h1>🔑 Password Safety Advisor</h1>
+        <p class="subtitle">Check the strength of a password. Your password is <strong>never stored or sent anywhere.</strong></p>
+      </div>
+      <div class="card">
+        <label class="input-label" for="passwordInput">Enter a password to check:</label>
+        <div class="password-input-wrap">
+          <input type="password" id="passwordInput" class="password-input" placeholder="Type a password to test..." autocomplete="off" />
+          <button class="toggle-pw-btn" id="togglePw" title="Show/Hide">👁</button>
+        </div>
+        <div class="strength-meter-wrap">
+          <div class="strength-bar" id="strengthBar"><div class="strength-fill" id="strengthFill"></div></div>
+          <span class="strength-label" id="strengthLabel">–</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="checkPasswordBtn">🔑 Analyze Password</button>
+          <button class="btn btn-secondary" id="clearPwBtn">✕ Clear</button>
+        </div>
+      </div>
+      <div class="result-card hidden" id="passwordResult">
+        <div class="result-verdict" id="passwordVerdict"></div>
+        <div id="pwScoreDisplay" class="risk-score-label"></div>
+        <div class="pw-checks" id="pwChecks"></div>
+        <div class="result-section">
+          <h3>💡 Suggestions to improve:</h3>
+          <ul id="passwordSuggestions" class="action-list"></ul>
+        </div>
+        <div class="result-section tips-box">
+          <h3>🔐 Best Practices</h3>
+          <ul>
+            <li>Use a different password for every account.</li>
+            <li>Consider a <strong>password manager</strong> like Bitwarden or 1Password.</li>
+            <li>Enable <strong>two-factor authentication (2FA)</strong> wherever possible.</li>
+            <li>Never share your password with anyone — not even IT support.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="disclaimer-box small">
+        <strong>🔒 Privacy Guarantee:</strong> Passwords are analyzed entirely in your browser. Nothing is stored or transmitted.
+      </div>
+    </section>
+
+    <!-- ===== CHATBOT ===== -->
+    <section class="section" id="chatbot">
+      <div class="section-header">
+        <h1>🤖 Cyber Awareness Chatbot</h1>
+        <p class="subtitle">Ask any cybersecurity question in plain English.</p>
+      </div>
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-msg bot">
+            <div class="chat-bubble">
+              👋 Hi! I am your Cyber Awareness Assistant. Ask me anything about staying safe online — like <em>"What is phishing?"</em> or <em>"Is it safe to share an OTP?"</em>
+            </div>
+          </div>
+        </div>
+        <div class="quick-questions">
+          <span class="qq-label">Quick questions:</span>
+          <button class="qq-btn" data-q="What is phishing?">What is phishing?</button>
+          <button class="qq-btn" data-q="How do I identify a fake website?">Fake website?</button>
+          <button class="qq-btn" data-q="I accidentally clicked a suspicious link">Clicked bad link?</button>
+          <button class="qq-btn" data-q="Is it safe to share an OTP?">Share OTP?</button>
+          <button class="qq-btn" data-q="How do I create a strong password?">Strong password?</button>
+          <button class="qq-btn" data-q="What is two-factor authentication?">What is 2FA?</button>
+          <button class="qq-btn" data-q="What is social engineering?">Social engineering?</button>
+          <button class="qq-btn" data-q="I think my account was hacked, what should I do?">Account hacked?</button>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" class="chat-input" placeholder="Ask a cybersecurity question..." />
+          <button class="btn btn-primary" id="chatSendBtn">Send ➤</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SAFETY TIPS ===== -->
+    <section class="section" id="tips">
+      <div class="section-header">
+        <h1>💡 Safety Tips</h1>
+        <p class="subtitle">Practical steps to protect yourself and your family online.</p>
+      </div>
+      <div class="tips-categories">
+        <div class="tips-category">
+          <h2>📧 Email &amp; Messages</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">1</div><div><strong>Never click links in unexpected emails.</strong> Go directly to the company's official website instead.</div></div>
+            <div class="tip-item"><div class="tip-num">2</div><div><strong>Check the sender's email address carefully.</strong> Fake emails often use addresses like "support@paypa1.com".</div></div>
+            <div class="tip-item"><div class="tip-num">3</div><div><strong>Be suspicious of urgent requests.</strong> Phrases like "Act now or your account will be closed" are classic scare tactics.</div></div>
+            <div class="tip-item"><div class="tip-num">4</div><div><strong>Never share OTPs.</strong> No legitimate company will ever ask for your OTP over a call or message.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>🔑 Passwords &amp; Accounts</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">5</div><div><strong>Use a unique password for every account.</strong> If one account is hacked, others stay safe.</div></div>
+            <div class="tip-item"><div class="tip-num">6</div><div><strong>Enable two-factor authentication (2FA).</strong> This adds a second layer of protection even if your password is stolen.</div></div>
+            <div class="tip-item"><div class="tip-num">7</div><div><strong>Use a password manager.</strong> Apps like Bitwarden or 1Password can generate and store strong passwords.</div></div>
+            <div class="tip-item"><div class="tip-num">8</div><div><strong>Never share your password</strong> — not even with IT support, bank staff, or close friends.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>🌐 Browsing Safely</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">9</div><div><strong>Look for HTTPS</strong> before entering personal information — but note that HTTPS alone does not guarantee a site is safe.</div></div>
+            <div class="tip-item"><div class="tip-num">10</div><div><strong>Avoid public Wi-Fi for sensitive activities</strong> like banking. Use a VPN if you must use public networks.</div></div>
+            <div class="tip-item"><div class="tip-num">11</div><div><strong>Keep your software updated.</strong> Updates fix security holes that hackers exploit.</div></div>
+            <div class="tip-item"><div class="tip-num">12</div><div><strong>Be careful what you download.</strong> Malicious software often hides in free downloads or pirated content.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>📱 Social Media &amp; Privacy</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">13</div><div><strong>Review your privacy settings regularly.</strong> Limit who can see your posts, location, and personal details.</div></div>
+            <div class="tip-item"><div class="tip-num">14</div><div><strong>Do not overshare online.</strong> Your date of birth, address, and phone number can be used to impersonate you.</div></div>
+            <div class="tip-item"><div class="tip-num">15</div><div><strong>Be cautious of friend requests from strangers.</strong> Fake profiles are used to gather information or run scams.</div></div>
+            <div class="tip-item"><div class="tip-num">16</div><div><strong>Think before you post.</strong> Once something is online, it can be very difficult to remove permanently.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>🏦 OTP &amp; Banking Safety</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">17</div><div><strong>Never share your OTP with anyone.</strong> Not bank employees, not tech support, not family. Your bank will never ask for it.</div></div>
+            <div class="tip-item"><div class="tip-num">18</div><div><strong>Hang up on suspicious callers.</strong> If someone calls claiming to be from your bank and asks for your PIN or OTP, it is fraud.</div></div>
+            <div class="tip-item"><div class="tip-num">19</div><div><strong>Set transaction limits on your bank account.</strong> Lower daily limits reduce losses if your account is compromised.</div></div>
+            <div class="tip-item"><div class="tip-num">20</div><div><strong>Monitor bank statements regularly.</strong> Report any unauthorized transaction immediately.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>📶 Public Wi-Fi Safety</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">21</div><div><strong>Avoid banking or shopping on public Wi-Fi.</strong> Cafes and airports often have unsecured networks.</div></div>
+            <div class="tip-item"><div class="tip-num">22</div><div><strong>Watch out for fake Wi-Fi hotspots.</strong> Criminals set up hotspots to intercept your data.</div></div>
+            <div class="tip-item"><div class="tip-num">23</div><div><strong>Use a VPN on public networks.</strong> A VPN encrypts your connection.</div></div>
+            <div class="tip-item"><div class="tip-num">24</div><div><strong>Turn off auto-connect.</strong> Disable auto-connect to known networks on your phone.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>💻 Device Security</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">25</div><div><strong>Keep all software updated.</strong> Security patches fix vulnerabilities attackers exploit.</div></div>
+            <div class="tip-item"><div class="tip-num">26</div><div><strong>Use a strong screen lock.</strong> Set a PIN, password, or biometric lock on your devices.</div></div>
+            <div class="tip-item"><div class="tip-num">27</div><div><strong>Install apps only from official stores.</strong> Avoid side-loaded APK files.</div></div>
+            <div class="tip-item"><div class="tip-num">28</div><div><strong>Back up your data regularly.</strong> Backups protect you from ransomware and hardware failure.</div></div>
+          </div>
+        </div>
+        <div class="tips-category">
+          <h2>🔐 Two-Factor Authentication (2FA)</h2>
+          <div class="tips-list">
+            <div class="tip-item"><div class="tip-num">29</div><div><strong>Enable 2FA on every important account.</strong> Even if your password is stolen, attackers cannot log in without the second factor.</div></div>
+            <div class="tip-item"><div class="tip-num">30</div><div><strong>Prefer an authenticator app over SMS.</strong> Apps like Google Authenticator are more secure than SMS codes.</div></div>
+            <div class="tip-item"><div class="tip-num">31</div><div><strong>Store your 2FA backup codes safely.</strong> Print and lock them away — never store them in your email.</div></div>
+            <div class="tip-item"><div class="tip-num">32</div><div><strong>Never share 2FA codes with anyone.</strong> No legitimate service will ever ask you to read your 2FA code aloud.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="disclaimer-box">
+        <strong>⚠️ Disclaimer:</strong> CyberGuard AI provides cybersecurity guidance for awareness purposes only.
+        It cannot guarantee that any message, link, or website is completely safe. Always verify through official channels.
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
